@@ -1,2 +1,2 @@
 ```
-g++ main.cpp -I "./ga/include" -Wall -o "main"
+g++ main.cpp -I "./ga/include" -Wall -o "main.out"
