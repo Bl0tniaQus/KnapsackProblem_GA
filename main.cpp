@@ -106,15 +106,17 @@ int main()
       initial_population.push_back(generateRandomIndividual(n_items, &generator));
   }
   KnapsackProblem problem;
-  ga::algorithm alg = ga::make_algorithm(std::move(problem), std::move(initial_population),
+  ga::algorithm<KnapsackProblem> alg = ga::make_algorithm(std::move(problem), std::move(initial_population),
                                       elite_count, std::move(generator));
 for (int i = 0; i < generation_count; i++) {alg.iterate();}
-for (const ga::solution solution : alg.population())
+for (const ga::solution<std::vector<bool>, double>& solution : alg.population())
 {
      std::cout<< "x = ";
      for (auto gene : solution.x)
-      std::cout<<gene;
-      std::cout << "\tf(x) = ";
+     {
+         std::cout<<gene; 
+     }
+        std::cout << "\tf(x) = ";
     std::cout << ' ' << -solution.fitness;
     std::cout << "\n";
     }
