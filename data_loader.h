@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -30,4 +31,22 @@ KnapsackData loadKnapsackData(const std::string& fileName) {
     }
 
     return KnapsackData{0.0, {}};
+}
+std::vector<double> getWeights(KnapsackData* data)
+{
+    std::vector<double>weights = {};
+    for (Item i : data->items)
+    {
+        weights.push_back(i.volume);
+    }
+    return weights;
+}
+std::vector<double> getValues(KnapsackData* data)
+{
+    std::vector<double>values = {};
+    for (Item i : data->items)
+    {
+        values.push_back(i.value);
+    }
+    return values;
 }
