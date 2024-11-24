@@ -31,24 +31,3 @@ KnapsackData loadKnapsackData(const std::string& fileName) {
 
     return KnapsackData{0.0, {}};
 }
-
-int main() {
-    const std::string fileName = "knapsack_data.txt";
-
-    try {
-        KnapsackData data = loadKnapsackData(fileName);
-
-        std::cout << "Pojemność plecaka: " << data.capacity << "\n";
-        std::cout << "Przedmioty:\n";
-        for (const auto& item : data.items) {
-            std::cout << "ID: " << item.id
-            << ", Objętość: " << item.volume
-            << ", Wartość: " << item.value << "\n";
-        }
-    } catch (const std::exception& e) {
-        std::cerr << "Wystąpił błąd: " << e.what() << "\n";
-    }
-
-    return 0;
-}
-
