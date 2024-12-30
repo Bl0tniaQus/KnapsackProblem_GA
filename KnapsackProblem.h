@@ -2,6 +2,7 @@
 #include <vector>
 #include <random>
 #include <stdexcept>
+#include <fstream>
 #include "ga/algorithm.hpp"
 #include "data_loader.h"
 class KnapsackProblem
@@ -94,3 +95,90 @@ std::vector<bool> generateRandomIndividual(int n, std::default_random_engine* ge
     }
     return individual;
 }
+
+double getPopulationAverage(ga::algorithm<KnapsackProblem>* alg)
+{
+    double sum = 0;
+    for (const ga::solution<std::vector<bool>, double>& solution : alg->population())
+    {
+        sum += solution.fitness;
+    }
+    return -sum / alg->population().size();
+}
+void calculate(ga::algorithm<KnapsackProblem>* alg, int n_generations, std::vector<double>* averages)
+{
+    averages->push_back(getPopulationAverage(alg));
+    for (int i=0; i<n_generations; i++)
+    {
+        alg->iterate();
+        averages->push_back(getPopulationAverage(alg));
+    }
+}
+double getMaxValue(ga::algorithm<KnapsackProblem>* alg)
+{
+    double max = 0;
+    for (const ga::solution<std::vector<bool>, double>& solution : alg->population())
+    {
+        if (-solution.fitness > max)
+        {
+            max = -solution.fitness;
+        }
+    }
+    return max;
+}
+std::vector<std::vector<bool>> getDifferentBestValues(ga::algorithm<KnapsackProblem>* alg)
+{
+    std::vector<std::vector<bool>> result = {};
+    double max = getMaxValue(alg);
+
+    for (const ga::solution<std::vector<bool>, double>& solution : alg->population())
+    {
+        if (-solution.fitness!=max) continue;
+        else
+        {
+            if (result.size() == 0) {result.push_back(solution.x);}
+            else
+            {
+                bool unique = true;
+                    for (int i = 0; i<result.size(); i++)
+                    {
+
+                        if (result[i] == solution.x) {unique = false; break;}
+                    }
+                    if (unique)
+                    {
+                        result.push_back(solution.x);
+                    }
+            }
+        }
+
+    }
+    return result;
+}
+std::vector<std::vector<int>> getItemNumbers(std::vector<std::vector<bool>> results)
+{
+    std::vector<std::vector<int>> numberResults = {};
+    for (int i = 0; i<results.size(); i++)
+    {
+        std::vector<int> res = {};
+        for (int j = 0; j<results[i].size(); j++)
+        {
+            if (results[i][j]) res.push_back(j+1);
+        }
+        numberResults.push_back(res);
+    }
+    return numberResults;
+}
+void saveAverages(std::vector<double> averages)
+{
+    std::fstream file;
+    file.open("results.txt", std::fstream::out);
+    std::string str = "";
+    for (int i = 0; i<averages.size(); i++)
+    {
+        str = str + std::to_string(averages[i]) + "\n";
+    }
+    file << str;
+    file.close();
+}
+
