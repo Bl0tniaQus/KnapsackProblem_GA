@@ -99,12 +99,11 @@ int main(int argc, char *argv[])
     std::cout<<"Running GA for "<<fileName<<std::endl;
     std::cout<<"Generations: "<<generation_count<<"; Population size: "<<population_size<<"; Elite count: "<<elite_count<<std::endl;
     std::cout<<"Recombination rate: "<<recombination_rate<<"; Mutation_rate: "<<mutation_rate<<std::endl;
-    std::default_random_engine generator = std::default_random_engine(time(0));
+    std::default_random_engine generator = std::default_random_engine(time(NULL));
     KnapsackData data = loadKnapsackData(fileName);
     KnapsackProblem problem(&data, mutation_rate, recombination_rate);
     int n_items = data.items.size();
     std::vector<std::vector<bool>> initial_population;
-    std::vector<bool> v = generateRandomIndividual(n_items, &generator);
     for (int i=0;i<population_size;i++)
         {
             initial_population.push_back(generateRandomIndividual(n_items, &generator));

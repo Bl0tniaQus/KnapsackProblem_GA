@@ -15,8 +15,8 @@ public:
     {
         weights = getWeights(data);
         values = getValues(data);
-        n_items = data->items.size();
         capacity = data->capacity;
+        n_items = data->items.size();
         this->mutation_rate = mutation_rate;
         this->recombination_rate = recombination_rate;
     }
@@ -91,7 +91,9 @@ std::vector<bool> generateRandomIndividual(int n, std::default_random_engine* ge
     std::default_random_engine &gen = *generator;
     for (int i=0; i<n; i++)
     {
-            individual[i] = gen()%2==0;
+            int digit = gen()%10;
+            if (digit<2) individual[i] = 1;
+            else individual[i] = 0;
     }
     return individual;
 }
