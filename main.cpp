@@ -48,5 +48,6 @@ int main(int argc, char *argv[])
         std::cout<<std::endl;
     }
     saveAverages(averages);
+    std::cout<<"Average values for each generation was saved into result.txt"<<std::endl;
     return 0;
 }
