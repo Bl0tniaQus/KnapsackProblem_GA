@@ -27,7 +27,16 @@ int main(int argc, char *argv[])
                 std::cout<<"-p <int> population size (default = 100)"<<std::endl;
                 std::cout<<"-e <int> elite count (number of best individuals to preserve in each generation) mus be less than population size (default = 10)"<<std::endl;
                 std::cout<<"-m <float> mutation rate <0;1> (default = 0.01)"<<std::endl;
-                std::cout<<"-r <float> recombination rate <0;1> (default = 0.5)"<<std::endl;
+                std::cout<<"-r <float> recombination rate <0;1> (default = 0.5)"<<std::endl<<std::endl;
+
+                std::cout<<"Data files should have following structure:"<<std::endl;
+                std::cout<<"<capacity>"<<std::endl;
+                std::cout<<"1 <weight> <value>"<<std::endl;
+                std::cout<<"2 <weight> <value>"<<std::endl;
+                std::cout<<"3 <weight> <value>"<<std::endl;
+                std::cout<<"..."<<std::endl<<std::endl;
+                std::cout<<"<capacity>, <weight> and <value> are all floating point numbers."<<std::endl;
+                std::cout<<"Each row other than the first one, represents different item."<<std::endl;
                 std::cout<<std::endl<<"Examples:"<<std::endl;
                 std::string programName = std::string(argv[0]);
                 std::cout<<"Run algoritm with default settings for data.txt:"<<std::endl;
@@ -98,7 +107,8 @@ int main(int argc, char *argv[])
 
     std::cout<<"Running GA for "<<fileName<<std::endl;
     std::cout<<"Generations: "<<generation_count<<"; Population size: "<<population_size<<"; Elite count: "<<elite_count<<std::endl;
-    std::cout<<"Recombination rate: "<<recombination_rate<<"; Mutation_rate: "<<mutation_rate<<std::endl;
+    std::cout<<"Recombination rate: "<<recombination_rate<<"; Mutation rate: "<<mutation_rate<<std::endl;
+
     std::default_random_engine generator = std::default_random_engine(time(NULL));
     KnapsackData data = loadKnapsackData(fileName);
     KnapsackProblem problem(&data, mutation_rate, recombination_rate);
