@@ -169,16 +169,19 @@ std::vector<std::vector<int>> getItemNumbers(std::vector<std::vector<bool>> resu
     }
     return numberResults;
 }
-void saveAverages(std::vector<double> averages)
+std::string saveAverages(std::vector<double> averages, std::string dataFile)
 {
+    std::string filename = "results_" + std::to_string(time(NULL)) + ".txt";
     std::fstream file;
-    file.open("results.txt", std::fstream::out);
+    file.open(filename, std::fstream::out);
     std::string str = "";
+    file << dataFile+"\n";
     for (int i = 0; i<averages.size(); i++)
     {
         str = str + std::to_string(averages[i]) + "\n";
     }
     file << str;
     file.close();
+    return filename;
 }
 

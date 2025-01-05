@@ -127,14 +127,11 @@ int main(int argc, char *argv[])
             if (j<uniqueBest[i].size()-1) std::cout<<uniqueBest[i][j]<<", ";
             if (j==uniqueBest[i].size()-1)std::cout<<uniqueBest[i][j];
         }
-        for (int x : uniqueBest[i])
-            {
 
-            }
         std::cout<<"]";
         std::cout<<std::endl;
     }
-    saveAverages(averages);
-    std::cout<<"Average values for each generation was saved into result.txt"<<std::endl;
+    std::string resultsFile = saveAverages(averages, fileName);
+    std::cout<<"Average values for each generation was saved into "<<resultsFile<<std::endl;
     return 0;
 }
