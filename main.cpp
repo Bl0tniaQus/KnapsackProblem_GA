@@ -3,12 +3,17 @@
 
 int main(int argc, char *argv[])
 {
-    std::default_random_engine generator = std::default_random_engine(time(0));
+    if (argc==1) {
+        std::cout<<"Please provide source data file as an argument."<<std::endl;
+        std::cout<<"example: ./main.out data.txt"<<std::endl;
+        return -1;
 
+    }
+    std::default_random_engine generator = std::default_random_engine(time(0));
     int population_size = 100;
     int elite_count = 10;
     int generation_count = 100;
-    KnapsackData data = loadKnapsackData("dane/dane1.txt");
+    KnapsackData data = loadKnapsackData(std::string(argv[1]));
     KnapsackProblem problem(&data, 0.01, 0.5);
     int n_items = data.items.size();
     std::vector<std::vector<bool>> initial_population;
@@ -43,17 +48,5 @@ int main(int argc, char *argv[])
         std::cout<<std::endl;
     }
     saveAverages(averages);
-    /*
-    for (const ga::solution<std::vector<bool>, double>& solution : alg.population())
-        {
-            std::cout<< "x = ";
-            for (auto gene : solution.x)
-                {
-                    std::cout<<gene;
-                }
-                std::cout << "\tf(x) = ";
-            std::cout << ' ' << -solution.fitness;
-            std::cout << "\n";
-        }*/
     return 0;
 }

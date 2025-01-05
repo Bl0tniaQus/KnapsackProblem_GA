@@ -16,6 +16,7 @@ struct KnapsackData {
 
 KnapsackData loadKnapsackData(const std::string& fileName) {
     KnapsackData data;
+    std::cout<<fileName;
     std::ifstream file(fileName);
 
     if (file.is_open()) {
