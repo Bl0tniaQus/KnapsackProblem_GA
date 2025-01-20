@@ -124,7 +124,6 @@ int main(int argc, char *argv[])
     calculate(&alg, generation_count, &averages);
     double max = getMaxValue(&alg);
     std::vector<std::vector<int>> uniqueBest = getItemNumbers(getDifferentBestValues(&alg));
-
     std::cout<<"Best value: "<<max<<std::endl;
     std::cout<<"Number of unique combinations that give best value: "<<uniqueBest.size()<<std::endl;
     for (int i = 0; i<uniqueBest.size();i++)

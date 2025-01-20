@@ -21,7 +21,7 @@ public:
         this->mutation_rate = mutation_rate;
         this->recombination_rate = recombination_rate;
     }
-  auto evaluate(const individual_type& x, generator_type&) const -> double
+  fitness_type evaluate(const individual_type& x, generator_type&) const
   {
       double res = 0;
       double weight = 0;
@@ -34,7 +34,7 @@ public:
       return -res;
   }
 
-  auto mutate(individual_type& x, generator_type& g) const -> void
+  void mutate(individual_type& x, generator_type& g) const
   {
     if (ga::draw(mutation_rate, g))
     {
@@ -45,8 +45,8 @@ public:
     }
   }
 
-  auto recombine(const individual_type& a, const individual_type& b,
-                 generator_type& g) const -> std::array<individual_type, 2>
+  std::array<individual_type, 2> recombine(const individual_type& a, const individual_type& b,
+                 generator_type& g) const
   {
     std::array<individual_type,2> new_individuals;
 
