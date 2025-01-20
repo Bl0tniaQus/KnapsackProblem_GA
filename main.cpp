@@ -1,6 +1,5 @@
 #include "data_loader.h"
 #include "KnapsackProblem.h"
-
 int population_size = 100;
 int elite_count = 10;
 int generation_count = 100;

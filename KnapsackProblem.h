@@ -3,6 +3,7 @@
 #include <random>
 #include <stdexcept>
 #include <fstream>
+#include <ctime>
 #include "ga/algorithm.hpp"
 #include "data_loader.h"
 class KnapsackProblem
